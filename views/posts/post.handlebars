@@ -1,0 +1,67 @@
+<header class="masthead" style="background-image: url('img/post-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>{{post.title}}</h1>
+                    <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+                    <span class="meta">Posted by
+                        <a href="/posts/user/{{post.user.id}}">{{post.user.firstName}}</a>
+                         {{formatDate post.date 'MMMM Do YYYY'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-10 mx-auto"> 
+                    <h3>{{post.title}}
+                        <small>{{{editIcon post.user.id user.id post.id false}}}</small>
+                    </h3>
+                    <p>{{post.body}}</p>
+                    
+                    {{#if post.allowComments}}
+                     <div class="card my-4">
+                        <h5 class="card-header">Leave a Comment:</h5>
+                        <div class="card-body">
+                            {{#if user}}
+                            <form method="post" action="/posts/comment/{{post.id}}">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="commentBody" rows="6"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                             {{else}}
+                            <p>Please
+                                <a href="/users/login">log</a> in to leave a comment</p>
+                            {{/if}}
+                        </div>
+                    </div>
+                  
+                     {{#each post.comments}}
+                <div class="media">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        <h5 class="mt-0"><a href="/posts/user/{{commentUser.id}}">
+                            {{commentUser.firstName}} {{commentUser.lastName}}
+                        </a></h5>
+                        {{commentBody}}
+                        
+                    </div>
+                    <div class="blockquote-footer" style="padding: 50px 0 20px;">Posted:
+                        <cite title="Source Title"> {{formatDate commentDate 'MMMM Do YYYY'}}</cite>
+                    </div>
+                    <small class="text-muted"></small>
+                </div>
+
+                 {{/each}} {{/if}}
+                                   
+            </div>
+        </div>
+    </article>
+    
+    <hr>

@@ -1,0 +1,43 @@
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>{{title}}</h1>
+                    <span class="subheading">A blog by bootstrap</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="card-image">
+                    {{#if user}} {{{editIcon user.id ../user.id id}}} {{/if}}
+                </div>
+             {{#each posts}}
+            <div class="post-preview">
+                <a href="/posts/post/{{id}}">
+                    <h2 class="post-title">
+                         {{title}}
+                    </h2>
+                    <h3 class="post-subtitle">
+                         {{stripTags (truncate body 150)}}
+                    </h3>
+                </a>
+                <p class="post-meta">Posted by
+                    <a href="/posts/user/{{user.id}}">{{user.firstName}} {{user.lastName}}</a>
+                     {{formatDate commentDate 'MMMM Do YYYY'}}</p>
+            </div>
+        
+   
+
+{{else}}
+<p>No Posts listed</p>
+{{/each}}
+<hr>
+</div>
+</div>
